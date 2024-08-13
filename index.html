@@ -6,27 +6,26 @@
     <title>Document</title>
 </head>
 <body>
-    <script> 
-        function getComputerChoice(names) {
-            return names[Math.floor(Math.random() * names.length)]
-        }
+    <script>    
 
-        function getHumanChoice(){
-            const hc = prompt("What is your choice")
-            alert = hc;
-        }
+const names = ["rock", "paper", "scissors"];
+
+const humanScore = 0;
+const computerScore = 0;
 
 
+    function getComputerChoice(names) {
+        return names[Math.floor(Math.random() * names.length)]
+     }
 
-    const names = [
-     "Rock",
-     "Paper",
-     "Scisscors",
-    ];
+    function getHumanChoice(){
+        return prompt ("What is your choice?")
+      
+    }
 
-    console.log(getComputerChoice(names));
-    
-    console.log(getHumanChoice());
+console.log(getComputerChoice(names))
+
+console.log(getHumanChoice())
 
 
     </script>
