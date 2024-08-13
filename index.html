@@ -13,25 +13,46 @@ const names = ["rock", "paper", "scissors"];
 const humanScore = 0;
 const computerScore = 0;
 
-
     function getComputerChoice(names) {
         return names[Math.floor(Math.random() * names.length)]
      }
 
     function getHumanChoice(){
         return prompt ("What is your choice?")
-      
     }
 
-console.log(getComputerChoice(names))
 
-console.log(getHumanChoice())
+function playRound(humanChoice, computerChoice) {
+        if (humanChoice == computerChoice) {
+            return ("It's a draw");
+        } else if ((humanChoice == "rock") && (computerChoice == "scissors")) {
+            return ("You win! Rock beats scissors");
+        } else if ((humanChoice == "rock" && computerChoice == "paper")) {
+            return ("You lose! Paper beats rock");
+        } else if ((humanChoice == "paper" && computerChoice == "rock")) {
+            return ("You win! Paper beats rock");
+        } else if ((humanChoice == "paper" && computerChoice == "scissors")) {
+            return ("You lose! Scissors beats paper");
+        } else if ((humanChoice == "scissors" && computerChoice == "paper")) {
+            return ("You win! Scissors beats paper");
+        } else if ((humanChoice == "scissors" && computerChoice == "rock")) {
+            return ("You lose! Rock beats scissors");
+        }
+     }
 
+const humanChoice = getHumanChoice();
+const computerChoice = getComputerChoice(names);
+
+playRound(humanChoice, computerChoice);
+
+console.log(humanChoice);
+console.log(computerChoice);
+
+console.log(playRound(humanChoice, computerChoice));
 
     </script>
 
 
-    
-    
+
 </body>
 </html>
