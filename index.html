@@ -35,8 +35,8 @@ function playRound(humanChoice, computerChoice) {
             humanScore += 1;
             return ("You win! Paper beats rock");
         } else if ((humanChoice == "paper" && computerChoice == "scissors")) {
-            return ("You lose! Scissors beats paper");
             computerScore += 1;
+            return ("You lose! Scissors beats paper");
         } else if ((humanChoice == "scissors" && computerChoice == "paper")) {
             humanScore += 1;
             return ("You win! Scissors beats paper");
