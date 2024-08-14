@@ -8,20 +8,24 @@
 <body>
     <script>    
 
+//Declare rock, paper, and scissors variables
 const names = ["rock", "paper", "scissors"];
 
+// Declare score variables and give them an initial value of 0.
 let humanScore = 0;
 let computerScore = 0;
 
+// Create function to make computer choice be a random choice of rock, paper, or scissors.
     function getComputerChoice(names) {
         return names[Math.floor(Math.random() * names.length)]
      }
 
+//Create function to make human choice be an input of rock, paper, or scissors. Make the input case insensitive.
     function getHumanChoice(){
         return prompt ("What is your choice?").toLowerCase()
     }
 
-
+//Create function that makes rules for rock, paper, scissors. Function also returns string saying win or lose, and changes the score of the game if there is a winner in the round.
 function playRound(humanChoice, computerChoice) {
         if (humanChoice == computerChoice) {
             return ("It's a draw");
@@ -46,6 +50,7 @@ function playRound(humanChoice, computerChoice) {
         }
      }
 
+// Create function that plays the round 5 times and logs results to console log.
 function playGame() {
     for (let i=0; i < 5; i++) {
         const humanChoice = getHumanChoice();
@@ -59,6 +64,7 @@ function playGame() {
     }
 }
 
+//Create function that declares a winner of the game after 5 rounds. Also declares if there is a tie.
 function declareWinner() {
     if (computerScore == humanScore) {
         return ("The match is a tie!")
