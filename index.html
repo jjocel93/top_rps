@@ -46,17 +46,31 @@ function playRound(humanChoice, computerChoice) {
         }
      }
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice(names);
+function playGame() {
+    for (let i=0; i < 5; i++) {
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice(names);
+        const currentRound = playRound(humanChoice, computerChoice);
+        console.log(currentRound);
+        console.log(humanScore);
+        console.log(computerScore);
+    }
+}
 
+function declareWinner() {
+    if (computerScore == humanScore) {
+        return ("The match is a tie!")
+    } else if (computerScore > humanScore){
+        return ("You lose the match!");
+    } else if (computerScore < humanScore){
+        return ("You win the match, congrats!");
+    }
+}
 
-console.log(humanChoice);
-console.log(computerChoice);
+playGame();
 
-console.log(playRound(humanChoice, computerChoice));
+console.log(declareWinner());
 
-console.log(humanScore);
-console.log(computerScore);
 
     </script>
 
