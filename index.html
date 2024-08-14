@@ -1,88 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <script>    
+  </head>
+  <body>
+    <script>
+      //Declare rock, paper, and scissors variables
+      const names = ['rock', 'paper', 'scissors'];
 
-//Declare rock, paper, and scissors variables
-const names = ["rock", "paper", "scissors"];
+      // Declare score variables and give them an initial value of 0.
+      let humanScore = 0;
+      let computerScore = 0;
 
-// Declare score variables and give them an initial value of 0.
-let humanScore = 0;
-let computerScore = 0;
+      // Create function to make computer choice be a random choice of rock, paper, or scissors.
+      function getComputerChoice(names) {
+        return names[Math.floor(Math.random() * names.length)];
+      }
 
-// Create function to make computer choice be a random choice of rock, paper, or scissors.
-    function getComputerChoice(names) {
-        return names[Math.floor(Math.random() * names.length)]
-     }
+      //Create function to make human choice be an input of rock, paper, or scissors. Make the input case insensitive.
+      function getHumanChoice() {
+        return prompt('What is your choice?').toLowerCase();
+      }
 
-//Create function to make human choice be an input of rock, paper, or scissors. Make the input case insensitive.
-    function getHumanChoice(){
-        return prompt ("What is your choice?").toLowerCase()
-    }
-
-//Create function that makes rules for rock, paper, scissors. Function also returns string saying win or lose, and changes the score of the game if there is a winner in the round.
-function playRound(humanChoice, computerChoice) {
+      //Create function that makes rules for rock, paper, scissors. Function also returns string saying win or lose, and changes the score of the game if there is a winner in the round.
+      function playRound(humanChoice, computerChoice) {
         if (humanChoice == computerChoice) {
-            return ("It's a draw");
-        } else if ((humanChoice == "rock") && (computerChoice == "scissors")) {
-            humanScore += 1;
-            return ("You win! Rock beats scissors");
-        } else if ((humanChoice == "rock" && computerChoice == "paper")) {
-            computerScore += 1;
-            return ("You lose! Paper beats rock");
-        } else if ((humanChoice == "paper" && computerChoice == "rock")) {
-            humanScore += 1;
-            return ("You win! Paper beats rock");
-        } else if ((humanChoice == "paper" && computerChoice == "scissors")) {
-            computerScore += 1;
-            return ("You lose! Scissors beats paper");
-        } else if ((humanChoice == "scissors" && computerChoice == "paper")) {
-            humanScore += 1;
-            return ("You win! Scissors beats paper");
-        } else if ((humanChoice == "scissors" && computerChoice == "rock")) {
-            computerScore += 1;
-            return ("You lose! Rock beats scissors");
+          return "It's a draw";
+        } else if (humanChoice == 'rock' && computerChoice == 'scissors') {
+          humanScore += 1;
+          return 'You win! Rock beats scissors';
+        } else if (humanChoice == 'rock' && computerChoice == 'paper') {
+          computerScore += 1;
+          return 'You lose! Paper beats rock';
+        } else if (humanChoice == 'paper' && computerChoice == 'rock') {
+          humanScore += 1;
+          return 'You win! Paper beats rock';
+        } else if (humanChoice == 'paper' && computerChoice == 'scissors') {
+          computerScore += 1;
+          return 'You lose! Scissors beats paper';
+        } else if (humanChoice == 'scissors' && computerChoice == 'paper') {
+          humanScore += 1;
+          return 'You win! Scissors beats paper';
+        } else if (humanChoice == 'scissors' && computerChoice == 'rock') {
+          computerScore += 1;
+          return 'You lose! Rock beats scissors';
         }
-     }
+      }
 
-// Create function that plays the round 5 times and logs results to console log.
-function playGame() {
-    for (let i=0; i < 5; i++) {
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice(names);
-        const currentRound = playRound(humanChoice, computerChoice);
-        console.log(computerChoice);
-        console.log(humanChoice);
-        console.log(currentRound);
-        console.log(humanScore);
-        console.log(computerScore);
-    }
-}
+      // Create function that plays the round 5 times and logs results to console log.
+      function playGame() {
+        for (let i = 0; i < 5; i++) {
+          const humanChoice = getHumanChoice();
+          const computerChoice = getComputerChoice(names);
+          const currentRound = playRound(humanChoice, computerChoice);
+          console.log(computerChoice);
+          console.log(humanChoice);
+          console.log(currentRound);
+          console.log(humanScore);
+          console.log(computerScore);
+        }
+      }
 
-//Create function that declares a winner of the game after 5 rounds. Also declares if there is a tie.
-function declareWinner() {
-    if (computerScore == humanScore) {
-        return ("The match is a tie!")
-    } else if (computerScore > humanScore){
-        return ("You lose the match!");
-    } else if (computerScore < humanScore){
-        return ("You win the match, congrats!");
-    }
-}
+      //Create function that declares a winner of the game after 5 rounds. Also declares if there is a tie.
+      function declareWinner() {
+        if (computerScore == humanScore) {
+          return 'The match is a tie!';
+        } else if (computerScore > humanScore) {
+          return 'You lose the match!';
+        } else if (computerScore < humanScore) {
+          return 'You win the match, congrats!';
+        }
+      }
 
-playGame();
+      playGame();
 
-console.log(declareWinner());
-
-
+      console.log(declareWinner());
     </script>
-
-
-
-</body>
+  </body>
 </html>
