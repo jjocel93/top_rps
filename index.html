@@ -5,98 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <button type="button" id="rock">Rock</button>
+  <button type="button" id="paper">Paper</button>
+  <button type="button" id="scissors">Scissors</button>
+  <div class="score" id="score">
+    <p>Player Score:</p>
+    <p id="playerscore">0</p>
+    <p>Computer Score:</p>
+    <p id="computerscore">0</p>
+  </div>
   <body>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
     <script>
-      //Reference the buttons so you can create an event
-      const rock = document.querySelector('#rock');
-      const paper = document.querySelector('#paper');
-      const scissors = document.querySelector('#scissors');
-
-      //Add event listeners to buttons
-      rock.addEventListener('click', function () {
-        const humanChoice = 'rock';
-        const computerChoice = getComputerChoice(names);
-        const currentRound = playRound(humanChoice, computerChoice);
-        console.log(humanChoice);
-        console.log(computerChoice);
-        console.log(humanScore);
-        console.log(computerScore);
-      });
-
-      paper.addEventListener('click', function () {
-        const humanChoice = 'paper';
-        const computerChoice = getComputerChoice(names);
-        const currentRound = playRound(humanChoice, computerChoice);
-        console.log(humanChoice);
-        console.log(computerChoice);
-        console.log(humanScore);
-        console.log(computerScore);
-      });
-
-      scissors.addEventListener('click', function () {
-        const humanChoice = 'scissors';
-        const computerChoice = getComputerChoice(names);
-        const currentRound = playRound(humanChoice, computerChoice);
-        console.log(humanChoice);
-        console.log(computerChoice);
-        console.log(humanScore);
-        console.log(computerScore);
-        console.log(currentRound);
-      });
-
       //Declare rock, paper, and scissors variables
       const names = ['rock', 'paper', 'scissors'];
 
       // Declare score variables and give them an initial value of 0.
-      let humanScore = 0;
-      let computerScore = 0;
+      let humanWin = 0;
+      let computerWin = 0;
 
       // Create function to make computer choice be a random choice of rock, paper, or scissors.
       function getComputerChoice(names) {
         return names[Math.floor(Math.random() * names.length)];
       }
 
-      //Create function that makes rules for rock, paper, scissors. Function also returns string saying win or lose, and changes the score of the game if there is a winner in the round.
-      function playRound(humanChoice, computerChoice) {
-        if (humanChoice == computerChoice) {
-          return "It's a draw";
-        } else if (humanChoice == 'rock' && computerChoice == 'scissors') {
-          humanScore += 1;
-          return 'You win! Rock beats scissors';
-        } else if (humanChoice == 'rock' && computerChoice == 'paper') {
-          computerScore += 1;
-          return 'You lose! Paper beats rock';
-        } else if (humanChoice == 'paper' && computerChoice == 'rock') {
-          humanScore += 1;
-          return 'You win! Paper beats rock';
-        } else if (humanChoice == 'paper' && computerChoice == 'scissors') {
-          computerScore += 1;
-          return 'You lose! Scissors beats paper';
-        } else if (humanChoice == 'scissors' && computerChoice == 'paper') {
-          humanScore += 1;
-          return 'You win! Scissors beats paper';
-        } else if (humanChoice == 'scissors' && computerChoice == 'rock') {
-          computerScore += 1;
-          return 'You lose! Rock beats scissors';
+      // Select score elements
+      const score = document.querySelector('#score');
+      const playerScore = document.querySelector('#playerscore');
+      const computerScore = document.querySelector('#computerscore');
+
+      //Reference the buttons so you can create an event
+      const rock = document.querySelector('#rock');
+      const paper = document.querySelector('#paper');
+      const scissors = document.querySelector('#scissors');
+
+      //create round and game winner elements and restart game
+      const roundWinner = document.createElement('h4');
+      const gameWinner = document.createElement('h3');
+      const restartGame = document.createElement('button');
+      restartGame.textContent = 'Restart Game';
+      restartGame.addEventListener('click', () => {
+        playerScore.textContent = humanWin;
+        computerScore.textContent = computerWin;
+        gameWinner.textContent = '';
+        roundWinner.textContent = '';
+        score.removeChild(restartGame);
+      });
+
+      //Add event listeners to buttons
+      rock.addEventListener('click', () => {
+        humanChoice = 'rock';
+        game();
+      });
+
+      paper.addEventListener('click', () => {
+        humanChoice = 'paper';
+        game();
+      });
+
+      scissors.addEventListener('click', () => {
+        humanChoice = 'scissors';
+        game();
+      });
+
+      function game() {
+        function playRound(humanChoice, computerChoice) {
+          if (humanChoice == computerChoice) {
+            roundWinner.textContent = "It's a draw";
+          } else if (humanChoice == 'rock' && computerChoice == 'scissors') {
+            humanWin += 1;
+            playerScore.textContent = humanWin;
+            roundWinner.textContent = 'You Win! Rock beats Scissors';
+          } else if (humanChoice == 'rock' && computerChoice == 'paper') {
+            computerWin += 1;
+            computerScore.textContent = computerWin;
+            roundWinner.textContent = 'You Lose! Paper beats Rock';
+          } else if (humanChoice == 'paper' && computerChoice == 'rock') {
+            humanWin += 1;
+            playerScore.textContent = humanWin;
+            roundWinner.textContent = 'You Win! Paper beats Rock';
+          } else if (humanChoice == 'paper' && computerChoice == 'scissors') {
+            computerWin += 1;
+            computerScore.textContent = computerWin;
+            roundWinner.textContent = 'You Lose! Scissors beats paper';
+          } else if (humanChoice == 'scissors' && computerChoice == 'paper') {
+            humanWin += 1;
+            playerScore.textContent = humanWin;
+            roundWinner.textContent = 'You Win! Scissors beats Paper';
+          } else if (humanChoice == 'scissors' && computerChoice == 'rock') {
+            computerWin += 1;
+            computerScore.textContent = computerWin;
+            roundWinner.textContent = 'You Lose! Rock beats Scissors';
+          }
+          score.appendChild(roundWinner);
         }
+
+        let computerChoice = getComputerChoice(names);
+        playRound(humanChoice, computerChoice);
+
+        if (humanWin == 5) {
+          gameWinner.textContent = 'You won the game!';
+          humanWin = 0;
+          computerWin = 0;
+          score.appendChild(restartGame);
+          return;
+        } else if (computerWin == 5) {
+          gameWinner.textContent = 'Computer has won the game!';
+          humanWin = 0;
+          computerWin = 0;
+          score.appendChild(restartGame);
+          return;
+        }
+
+        //Show the winner of the game
+        score.appendChild(gameWinner);
       }
-
-      // Create function that plays the round 5 times and logs results to console log.
-      // function playGame() {
-      //   const currentRound = playRound();
-      // }
-
-      //Create function that declares a winner of the game after 5 rounds. Also declares if there is a tie.
-      // function declareWinner() {
-      //   if ((computerScore = 5)) {
-      //     return 'You lose!';
-      //   } else if ((humanScore = 5)) {
-      //     return 'You win!';
-      //   }
-      // }
     </script>
   </body>
 </html>
