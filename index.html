@@ -6,7 +6,47 @@
     <title>Document</title>
   </head>
   <body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
     <script>
+      //Reference the buttons so you can create an event
+      const rock = document.querySelector('#rock');
+      const paper = document.querySelector('#paper');
+      const scissors = document.querySelector('#scissors');
+
+      //Add event listeners to buttons
+      rock.addEventListener('click', function () {
+        const humanChoice = 'rock';
+        const computerChoice = getComputerChoice(names);
+        const currentRound = playRound(humanChoice, computerChoice);
+        console.log(humanChoice);
+        console.log(computerChoice);
+        console.log(humanScore);
+        console.log(computerScore);
+      });
+
+      paper.addEventListener('click', function () {
+        const humanChoice = 'paper';
+        const computerChoice = getComputerChoice(names);
+        const currentRound = playRound(humanChoice, computerChoice);
+        console.log(humanChoice);
+        console.log(computerChoice);
+        console.log(humanScore);
+        console.log(computerScore);
+      });
+
+      scissors.addEventListener('click', function () {
+        const humanChoice = 'scissors';
+        const computerChoice = getComputerChoice(names);
+        const currentRound = playRound(humanChoice, computerChoice);
+        console.log(humanChoice);
+        console.log(computerChoice);
+        console.log(humanScore);
+        console.log(computerScore);
+        console.log(currentRound);
+      });
+
       //Declare rock, paper, and scissors variables
       const names = ['rock', 'paper', 'scissors'];
 
@@ -17,11 +57,6 @@
       // Create function to make computer choice be a random choice of rock, paper, or scissors.
       function getComputerChoice(names) {
         return names[Math.floor(Math.random() * names.length)];
-      }
-
-      //Create function to make human choice be an input of rock, paper, or scissors. Make the input case insensitive.
-      function getHumanChoice() {
-        return prompt('What is your choice?').toLowerCase();
       }
 
       //Create function that makes rules for rock, paper, scissors. Function also returns string saying win or lose, and changes the score of the game if there is a winner in the round.
@@ -50,33 +85,18 @@
       }
 
       // Create function that plays the round 5 times and logs results to console log.
-      function playGame() {
-        for (let i = 0; i < 5; i++) {
-          const humanChoice = getHumanChoice();
-          const computerChoice = getComputerChoice(names);
-          const currentRound = playRound(humanChoice, computerChoice);
-          console.log(computerChoice);
-          console.log(humanChoice);
-          console.log(currentRound);
-          console.log(humanScore);
-          console.log(computerScore);
-        }
-      }
+      // function playGame() {
+      //   const currentRound = playRound();
+      // }
 
       //Create function that declares a winner of the game after 5 rounds. Also declares if there is a tie.
-      function declareWinner() {
-        if (computerScore == humanScore) {
-          return 'The match is a tie!';
-        } else if (computerScore > humanScore) {
-          return 'You lose the match!';
-        } else if (computerScore < humanScore) {
-          return 'You win the match, congrats!';
-        }
-      }
-
-      playGame();
-
-      console.log(declareWinner());
+      // function declareWinner() {
+      //   if ((computerScore = 5)) {
+      //     return 'You lose!';
+      //   } else if ((humanScore = 5)) {
+      //     return 'You win!';
+      //   }
+      // }
     </script>
   </body>
 </html>
